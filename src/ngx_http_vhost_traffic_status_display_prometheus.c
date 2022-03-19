@@ -140,7 +140,10 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server(ngx_http_request_t *
             key.data = vtsn->data;
             key.len = vtsn->len;
 
-            ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, key.data, key.len);
+            escaped_key.data = vtsn->data;
+            escaped_key.len = vtsn->len;
+
+            //ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, key.data, key.len);
             buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &escaped_key, vtsn);
 
             /* calculates the sum */
@@ -280,7 +283,10 @@ ngx_http_vhost_traffic_status_display_prometheus_set_filter(ngx_http_request_t *
             key.data = vtsn->data;
             key.len = vtsn->len;
 
-            ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, key.data, key.len);
+            escaped_key.data = vtsn->data;
+            escaped_key.len = vtsn->len;
+
+            //ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, key.data, key.len);
             buf = ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(r, buf, &escaped_key, vtsn);
         }
 
@@ -402,7 +408,10 @@ ngx_http_vhost_traffic_status_display_prometheus_set_upstream(ngx_http_request_t
             key.data = vtsn->data;
             key.len = vtsn->len;
 
-            ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, key.data, key.len);
+            escaped_key.data = vtsn->data;
+            escaped_key.len = vtsn->len;
+
+            //ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, key.data, key.len);
             buf = ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(r, buf, &escaped_key, vtsn);
         }
 
@@ -463,7 +472,10 @@ ngx_http_vhost_traffic_status_display_prometheus_set_cache(ngx_http_request_t *r
             key.data = vtsn->data;
             key.len = vtsn->len;
 
-            ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, key.data, key.len);
+            escaped_key.data = vtsn->data;
+            escaped_key.len = vtsn->len;
+
+            //ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, key.data, key.len);
             buf = ngx_http_vhost_traffic_status_display_prometheus_set_cache_node(r, buf, &escaped_key, vtsn);
         }
 
@@ -507,7 +519,10 @@ ngx_http_vhost_traffic_status_display_prometheus_set(ngx_http_request_t *r,
 #endif
     buf = ngx_http_vhost_traffic_status_display_prometheus_set_server(r, buf, node);
 
-    ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, vtscf->sum_key.data, vtscf->sum_key.len);
+    escaped_key.data = vtscf->sum_key.data;
+    escaped_key.len = vtscf->sum_key.len;
+
+    //ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, vtscf->sum_key.data, vtscf->sum_key.len);
     buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &escaped_key, &vtscf->stats);
     
     /* filterZones */
